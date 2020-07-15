@@ -39,9 +39,9 @@ class DoublyLinkedList:
             self.head = new_node
             self.tail = new_node
         else:
-            new_node.next = self.head
-            self.head.prev = new_node
-            self.head = new_node
+            new_node.next = self.head #6's next points to 5
+            self.head.prev = new_node #5's prev points to 6
+            self.head = new_node       # head becomes 6
         
         
     """
@@ -66,9 +66,9 @@ class DoublyLinkedList:
             self.tail = new_node
             self.head = new_node
         else:
-            new_node.prev = self.tail
-            self.tail.next = new_node
-            self.tail = new_node
+            new_node.prev = self.tail   #5's prev points to 6
+            self.tail.next = new_node   #6's next points to 5
+            self.tail = new_node        #tail becomes 5
             
     """
     Removes the List's current tail node, making the 
