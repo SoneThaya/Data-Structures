@@ -9,6 +9,10 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+from queue import Queue
+from stack import Stack
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -145,48 +149,63 @@ class BSTNode:
         # if node is None:
         #     return
         
-        # self.in_order_print(self.left)
+        # self.in_order_print(node.left)
         
         # print(node.value)
         
-        # self.in_order_print(self.right)
-        # Set current to root of binary tree 
-        current = node
-        stack = [] # initialize stack 
-        done = 0 
+        # self.in_order_print(node.right)
         
-        while True: 
-            
-            # Reach the left most Node of the current Node 
-            if current is not None: 
-                
-                # Place pointer to a tree node on the stack  
-                # before traversing the node's left subtree 
-                stack.append(current) 
-            
-                current = current.left  
-    
-            
-            # BackTrack from the empty subtree and visit the Node 
-            # at the top of the stack; however, if the stack is  
-            # empty you are done 
-            elif(stack): 
-                current = stack.pop() 
-                print(current.value) # Python 3 printing 
-            
-                # We have visited the node and its left  
-                # subtree. Now, it's right subtree's turn 
-                current = current.right  
-    
-            else: 
-                break
+        if self.left is not None:
+            self.left.in_order_print(node)
+        print(self.value)
         
-        print() 
+        if self.right is not None:
+            self.right.in_order_print(node)
+        
+        
+        # current = node
+        # stack = [] # initialize stack 
+        # done = 0 
+        
+        # while True: 
+        #     # Reach the left most Node of the current Node 
+        #     if current is not None: 
+        #         # Place pointer to a tree node on the stack  
+        #         # before traversing the node's left subtree 
+        #         stack.append(current) 
+        #         current = current.left  
+        #     # BackTrack from the empty subtree and visit the Node 
+        #     # at the top of the stack; however, if the stack is  
+        #     # empty you are done 
+        #     elif(stack): 
+        #         current = stack.pop() 
+        #         print(current.value) 
+        #         # We have visited the node and its left  
+        #         # subtree. Now, it's right subtree's turn 
+        #         current = current.right  
+        #     else: 
+        #         break
+        
+        
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if node is None:
+            return
+        
+        queue = Queue()
+        
+        queue.enqueue(node)
+        
+        while len(queue) > 0:
+            node = queue.dequeue()
+            print(node.value)
+            
+            if node.left:
+                queue.enqueue(node.left)
+            if node.right:
+                queue.enqueue(node.right)
         # use a queue
         # start with queue root node
         
@@ -199,13 +218,33 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
-        # use a stack
-        # start your stack with the root node
+        if node is None:
+            return
+        stack = Stack()
         
-        # while loop that checks stack size
-            # pointer
-
+        stack.push(node)
+        
+        while len(stack) > 0:
+            node = stack.pop()
+            
+            print(node.value)
+            
+            if node.left:
+                stack.push(node.left)
+            if node.right:
+                stack.push(node.right)
+        # stack = []
+        # stack.append(self)
+        # # use a stack
+        # # start your stack with the root node
+        
+        # # while loop that checks stack size
+        #     # pointer
+        # while len(stack) > 0:
+        #     current = stack.pop()
+        #     print(current)
+            
+            
     # Stretch Goals -------------------------
     # Note: Research may be required
 
